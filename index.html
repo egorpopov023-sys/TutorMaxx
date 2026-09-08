@@ -14,7 +14,6 @@
             color: #4a3728;
         }
         
-        /* ===== БУРГЕР-МЕНЮ ===== */
         .burger-btn {
             position: fixed;
             top: 12px;
@@ -32,7 +31,6 @@
             justify-content: center;
             gap: 4px;
             box-shadow: 0 2px 12px rgba(245, 166, 35, 0.3);
-            transition: 0.3s;
             padding: 0;
         }
         .burger-btn:active { transform: scale(0.92); }
@@ -48,7 +46,6 @@
         .burger-btn.active span:nth-child(2) { opacity: 0; }
         .burger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
         
-        /* ===== ВЫПАДАЮЩЕЕ МЕНЮ ===== */
         .side-menu {
             position: fixed;
             top: 0;
@@ -96,7 +93,6 @@
         }
         .side-menu .menu-item .icon { font-size: 22px; width: 32px; text-align: center; }
         
-        /* ===== ОВЕРЛЕЙ ===== */
         .overlay {
             position: fixed;
             top: 0;
@@ -110,7 +106,6 @@
         }
         .overlay.show { display: block; }
         
-        /* ===== ВЕРСИЯ И ОБНОВЛЕНИЕ ===== */
         .version-tag {
             position: fixed;
             top: 12px;
@@ -123,31 +118,10 @@
             z-index: 999;
             font-weight: 500;
         }
-        .update-btn {
-            position: fixed;
-            top: 12px;
-            right: 65px;
-            background: rgba(245, 166, 35, 0.15);
-            border: 1px solid #f5a623;
-            color: #f5a623;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-        .update-btn:active { transform: scale(0.9); background: #f5a623; color: white; }
         
-        /* ===== СТРАНИЦЫ ===== */
         .page { display: none; padding: 5px 0; }
         .page.active { display: block; }
         
-        /* ===== КАРТОЧКИ ===== */
         .card { 
             background: #ffffff; 
             padding: 15px; 
@@ -161,7 +135,6 @@
         .card:active { transform: scale(0.98); background: #fdf7f0; }
         .card-small { padding: 12px; }
         
-        /* ===== ФОРМЫ ===== */
         input, textarea, select { 
             width: 100%; 
             padding: 12px 14px; 
@@ -193,18 +166,14 @@
             box-shadow: 0 2px 8px rgba(245, 166, 35, 0.2);
         }
         button.main:active { transform: scale(0.97); }
-        button.main:hover { background: #e0971a; }
-        
         button.danger { background: #e8a87c; box-shadow: 0 2px 8px rgba(232, 168, 124, 0.2); }
         button.danger:hover { background: #d4956b; }
-        
         button.success { background: #8cb369; box-shadow: 0 2px 8px rgba(140, 179, 105, 0.2); }
         button.success:hover { background: #7aa35a; }
         
         .flex-row { display: flex; gap: 10px; flex-wrap: wrap; }
         .flex-row > * { flex: 1; min-width: 120px; }
         
-        /* ===== БЕЙДЖИ ===== */
         .badge { 
             display: inline-block; 
             padding: 4px 12px; 
@@ -217,7 +186,6 @@
         .badge-yellow { background: #fcf3d5; color: #b88940; }
         .badge-gray { background: #f0ebe5; color: #b8a090; }
         
-        /* ===== СТАТИСТИКА ===== */
         .stat-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -241,7 +209,6 @@
             margin-top: 5px; 
         }
         
-        /* ===== ЧЕКБОКСЫ ===== */
         .checkbox-group { 
             display: flex; 
             align-items: center; 
@@ -256,7 +223,6 @@
         }
         .checkbox-group label { font-size: 15px; }
         
-        /* ===== ТЕГИ ===== */
         .tag { 
             display: inline-block; 
             background: #f5ede5; 
@@ -267,7 +233,6 @@
             color: #8a7a6a;
         }
         
-        /* ===== КАЛЕНДАРЬ ===== */
         .calendar-grid { 
             display: grid; 
             grid-template-columns: repeat(7, 1fr); 
@@ -302,7 +267,6 @@
             border-color: #e8a87c;
         }
         
-        /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal { 
             position: fixed; 
             top: 0; left: 0; right: 0; bottom: 0; 
@@ -337,7 +301,6 @@
         }
         .modal-close:hover { color: #8a7a6a; }
         
-        /* ===== ДОБАВЛЕНИЕ УЧЕНИКА ===== */
         .student-add-row {
             display: flex;
             gap: 10px;
@@ -362,13 +325,11 @@
         }
         .student-add-row button:active { transform: scale(0.95); }
         
-        /* ===== ДЗ (дневник) ===== */
         .dz-item {
             border-left: 3px solid #f5a623;
             padding-left: 12px;
         }
         
-        /* ===== ГЛАВНАЯ ===== */
         .greeting {
             font-size: 28px;
             font-weight: 700;
@@ -405,28 +366,20 @@
         }
         .day-info .info-item.today-profit .num { color: #8cb369; }
         
-        /* ===== ВСПОМОГАТЕЛЬНЫЕ ===== */
-        .hidden { display: none; }
-        .text-center { text-align: center; }
-        .mt-10 { margin-top: 10px; }
-        .mt-20 { margin-top: 20px; }
-        .mb-10 { margin-bottom: 10px; }
         .text-muted { color: #b8a090; font-size: 13px; }
+        .mt-20 { margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- ===== БУРГЕР-МЕНЮ ===== -->
     <button class="burger-btn" id="burgerBtn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
     </button>
 
-    <!-- ===== ОВЕРЛЕЙ ===== -->
     <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
-    <!-- ===== ВЫПАДАЮЩЕЕ МЕНЮ ===== -->
     <div class="side-menu" id="sideMenu">
         <div class="menu-title">📚 Меню</div>
         <div class="menu-item active" onclick="navigateTo('home')">
@@ -449,11 +402,8 @@
         </div>
     </div>
 
-    <!-- ===== ВЕРСИЯ И ОБНОВЛЕНИЕ ===== -->
-    <div class="version-tag" id="version-tag">v1.0.9</div>
-    <button class="update-btn" onclick="forceUpdate()" title="Обновить">🔄</button>
+    <div class="version-tag" id="version-tag">v1.1.0</div>
 
-    <!-- ===== МОДАЛЬНОЕ ОКНО (РЕДАКТИРОВАНИЕ) ===== -->
     <div id="edit-modal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeEditModal()">✕</button>
@@ -479,11 +429,9 @@
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 1: ГЛАВНАЯ ===== -->
     <div id="page-home" class="page active">
         <div class="greeting">👋 Здравствуйте!</div>
         <div class="greeting-sub" id="greeting-date"></div>
-        
         <div class="day-info" id="day-info">
             <div class="info-item today-lessons">
                 <div class="num" id="today-count">0</div>
@@ -494,13 +442,11 @@
                 <div class="lbl">💰 Заработано сегодня</div>
             </div>
         </div>
-        
         <div style="margin-top:20px; text-align:center; color:#b8a090; font-size:13px;">
             ☰ Нажмите на меню для перехода к разделам
         </div>
     </div>
 
-    <!-- ===== СТРАНИЦА 2: ФИНАНСЫ ===== -->
     <div id="page-finance" class="page">
         <h3 style="color:#4a3728;">💰 Финансы</h3>
         <div class="stat-grid">
@@ -515,7 +461,6 @@
         <div id="lessons-list"></div>
     </div>
 
-    <!-- ===== СТРАНИЦА 3: КАЛЕНДАРЬ ===== -->
     <div id="page-calendar" class="page">
         <h3 style="color:#4a3728;">📅 Календарь</h3>
         <div style="display:flex; gap:10px; margin-bottom:15px;">
@@ -527,7 +472,6 @@
         <div id="calendar-lessons" style="margin-top:15px;"></div>
     </div>
 
-    <!-- ===== СТРАНИЦА 4: ЗАНЯТИЯ ===== -->
     <div id="page-lessons" class="page">
         <h3 style="color:#4a3728;">➕ Новое занятие</h3>
         <input type="text" id="stu-name" placeholder="Имя ученика *">
@@ -549,14 +493,12 @@
         <div id="all-lessons-list"></div>
     </div>
 
-    <!-- ===== СТРАНИЦА 5: ДНЕВНИК ===== -->
     <div id="page-diary" class="page">
         <h3 style="color:#4a3728;">📖 Дневник</h3>
         <p class="text-muted" style="margin-bottom:15px;">Все домашние задания</p>
         <div id="diary-list"></div>
     </div>
 
-    <!-- ===== СТРАНИЦА 6: УЧЕНИКИ ===== -->
     <div id="page-students" class="page">
         <h3 style="color:#4a3728;">👨‍🎓 Ученики</h3>
         <div class="student-add-row">
@@ -567,11 +509,10 @@
     </div>
 
     <script>
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
         const tg = window.Telegram.WebApp;
         tg.expand();
         
-        const APP_VERSION = "1.0.9";
+        const APP_VERSION = "1.1.0";
         document.getElementById('version-tag').textContent = 'v' + APP_VERSION;
 
         let allData = { lessons: [], dz: [], students: [] };
@@ -580,7 +521,6 @@
         let currentYear = new Date().getFullYear();
         let selectedDate = new Date().toISOString().split('T')[0];
 
-        // ===== МЕНЮ =====
         function toggleMenu() {
             const menu = document.getElementById('sideMenu');
             const overlay = document.getElementById('overlay');
@@ -609,18 +549,9 @@
             const pageEl = document.getElementById('page-' + page);
             if (pageEl) pageEl.classList.add('active');
             
-            // ВСЕГДА обновляем данные при переключении
             renderAll();
         }
 
-        // ===== ПРИНУДИТЕЛЬНОЕ ОБНОВЛЕНИЕ =====
-        function forceUpdate() {
-            const version = Date.now();
-            const currentUrl = window.location.href.split('?')[0];
-            window.location.href = currentUrl + '?v=' + version;
-        }
-
-        // ===== ДОБАВЛЕНИЕ УЧЕНИКА =====
         function addStudent() {
             const name = document.getElementById('new-student-name').value.trim();
             if (!name) {
@@ -655,7 +586,6 @@
             localStorage.setItem('students_cache', JSON.stringify(students));
         }
 
-        // ===== ДОБАВЛЕНИЕ ЗАНЯТИЯ =====
         function addLesson() {
             const name = document.getElementById('stu-name').value.trim();
             const price = document.getElementById('stu-price').value.trim();
@@ -702,7 +632,6 @@
             });
         }
 
-        // ===== ДОБАВЛЕНИЕ ДЗ =====
         function saveDZ() {
             const name = document.getElementById('dz-name').value.trim();
             const topic = document.getElementById('dz-topic').value.trim();
@@ -721,7 +650,6 @@
             });
         }
 
-        // ===== ЗАГРУЗКА ВСЕХ ДАННЫХ =====
         function loadAllData(callback) {
             tg.CloudStorage.getKeys((err, keys) => {
                 if (err || !keys) { 
@@ -766,33 +694,26 @@
             });
         }
 
-        // ===== ГЛАВНАЯ =====
         function renderHome() {
             const today = new Date().toISOString().split('T')[0];
-            
             const todayLessons = allData.lessons.filter(l => l.date === today && !l.cancelled);
             const todayCount = todayLessons.length;
             const todayProfit = todayLessons.reduce((sum, l) => sum + Number(l.price), 0);
-            
             const now = new Date();
             const dateStr = now.toLocaleDateString('ru', { weekday: 'long', day: 'numeric', month: 'long' });
             document.getElementById('greeting-date').textContent = 'Сегодня ' + dateStr;
-            
             document.getElementById('today-count').textContent = todayCount;
             document.getElementById('today-profit').textContent = todayProfit + ' ₽';
         }
 
-        // ===== ФИНАНСЫ =====
         function renderFinance() {
             const lessons = allData.lessons.filter(l => !l.cancelled);
             const cancelled = allData.lessons.filter(l => l.cancelled);
             const recurring = allData.lessons.filter(l => l.recurring && l.recurring !== 'none');
-
             const total = lessons.length;
             const totalProfit = lessons.reduce((sum, l) => sum + Number(l.price), 0);
             const paidProfit = lessons.filter(l => l.paid).reduce((sum, l) => sum + Number(l.price), 0);
             const unpaidProfit = lessons.filter(l => !l.paid).reduce((sum, l) => sum + Number(l.price), 0);
-
             document.getElementById('total-count').textContent = total;
             document.getElementById('total-profit').textContent = totalProfit + ' ₽';
             document.getElementById('paid-profit').textContent = paidProfit + ' ₽';
@@ -801,31 +722,20 @@
             document.getElementById('recurring-count').textContent = recurring.length;
         }
 
-        // ===== ОТОБРАЖЕНИЕ ЗАНЯТИЙ =====
         function renderLessons() {
             const filter = document.getElementById('filter-name')?.value.toLowerCase() || '';
             const container = document.getElementById('all-lessons-list');
             if (!container) return;
-
-            const filtered = allData.lessons
-                .filter(l => l.name.toLowerCase().includes(filter))
-                .sort((a, b) => b.created - a.created);
-
+            const filtered = allData.lessons.filter(l => l.name.toLowerCase().includes(filter)).sort((a, b) => b.created - a.created);
             if (filtered.length === 0) {
                 container.innerHTML = '<div class="card" style="text-align:center;color:#b8a090;">Нет занятий</div>';
                 return;
             }
-
             container.innerHTML = filtered.map(l => {
                 let statusBadge = '';
-                if (l.cancelled) {
-                    statusBadge = '<span class="badge badge-gray">❌ Отменено</span>';
-                } else if (l.paid) {
-                    statusBadge = '<span class="badge badge-green">✅ Оплачено</span>';
-                } else {
-                    statusBadge = '<span class="badge badge-red">❌ Не оплачено</span>';
-                }
-
+                if (l.cancelled) statusBadge = '<span class="badge badge-gray">❌ Отменено</span>';
+                else if (l.paid) statusBadge = '<span class="badge badge-green">✅ Оплачено</span>';
+                else statusBadge = '<span class="badge badge-red">❌ Не оплачено</span>';
                 return `
                     <div class="card card-small" onclick="openEditModal('${l.key}')">
                         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -844,21 +754,14 @@
             }).join('');
         }
 
-        // ===== ПОСЛЕДНИЕ ЗАНЯТИЯ =====
         function renderRecentLessons() {
             const container = document.getElementById('lessons-list');
             if (!container) return;
-
-            const recent = allData.lessons
-                .filter(l => !l.cancelled)
-                .sort((a, b) => b.created - a.created)
-                .slice(0, 5);
-
+            const recent = allData.lessons.filter(l => !l.cancelled).sort((a, b) => b.created - a.created).slice(0, 5);
             if (recent.length === 0) {
                 container.innerHTML = '<div class="card" style="text-align:center;color:#b8a090;">Нет занятий</div>';
                 return;
             }
-
             container.innerHTML = recent.map(l => `
                 <div class="card card-small" onclick="openEditModal('${l.key}')">
                     <div style="display:flex;justify-content:space-between;">
@@ -872,7 +775,6 @@
             `).join('');
         }
 
-        // ===== КАЛЕНДАРЬ =====
         function renderCalendar() {
             const container = document.getElementById('calendar-grid');
             const monthLabel = document.getElementById('calendar-month');
@@ -910,26 +812,22 @@
             }
 
             container.innerHTML = html;
-            
-            // Показываем занятия на выбранную дату
             showDateLessons(selectedDate);
         }
 
         function selectDate(date) {
             selectedDate = date;
-            renderCalendar(); // Перерисовываем календарь с выделением
+            renderCalendar();
         }
 
         function showDateLessons(date) {
             const container = document.getElementById('calendar-lessons');
             if (!container) return;
-
             const lessons = allData.lessons.filter(l => l.date === date && !l.cancelled);
             if (lessons.length === 0) {
                 container.innerHTML = `<div class="card" style="text-align:center;color:#b8a090;">На ${new Date(date).toLocaleDateString('ru')} занятий нет</div>`;
                 return;
             }
-
             container.innerHTML = `
                 <h4 style="margin:10px 0; color:#4a3728;">📅 ${new Date(date).toLocaleDateString('ru')}</h4>
                 ${lessons.map(l => `
@@ -949,27 +847,20 @@
             renderCalendar();
         }
 
-        // ===== УЧЕНИКИ =====
         function renderStudents() {
             const container = document.getElementById('students-list');
             if (!container) return;
-
             const students = allData.students || [];
-            
             if (students.length === 0) {
                 container.innerHTML = '<div class="card" style="text-align:center;color:#b8a090;">Нет учеников</div>';
                 return;
             }
-
             const stats = {};
             allData.lessons.filter(l => !l.cancelled).forEach(l => {
-                if (!stats[l.name]) {
-                    stats[l.name] = { count: 0, total: 0 };
-                }
+                if (!stats[l.name]) stats[l.name] = { count: 0, total: 0 };
                 stats[l.name].count++;
                 stats[l.name].total += Number(l.price);
             });
-
             container.innerHTML = students.map(name => {
                 const s = stats[name] || { count: 0, total: 0 };
                 return `
@@ -992,36 +883,29 @@
             renderLessons();
         }
 
-        // ===== ДНЕВНИК =====
         function renderDiary() {
             const container = document.getElementById('diary-list');
             if (!container) return;
-
             if (allData.dz.length === 0) {
                 container.innerHTML = '<div class="card" style="text-align:center;color:#b8a090;">Нет домашних заданий</div>';
                 return;
             }
-
-            container.innerHTML = allData.dz
-                .sort((a, b) => b.created - a.created)
-                .map(d => `
-                    <div class="card card-small dz-item">
-                        <div style="display:flex;justify-content:space-between;">
-                            <b style="color:#4a3728;">${d.name}</b>
-                            <span style="font-size:12px;color:#b8a090;">${d.date}</span>
-                        </div>
-                        ${d.topic ? '<div style="font-size:13px;color:#8a7a6a;">📖 ' + d.topic + '</div>' : ''}
-                        <div style="margin-top:8px; color:#4a3728;">${d.text}</div>
+            container.innerHTML = allData.dz.sort((a, b) => b.created - a.created).map(d => `
+                <div class="card card-small dz-item">
+                    <div style="display:flex;justify-content:space-between;">
+                        <b style="color:#4a3728;">${d.name}</b>
+                        <span style="font-size:12px;color:#b8a090;">${d.date}</span>
                     </div>
-                `).join('');
+                    ${d.topic ? '<div style="font-size:13px;color:#8a7a6a;">📖 ' + d.topic + '</div>' : ''}
+                    <div style="margin-top:8px; color:#4a3728;">${d.text}</div>
+                </div>
+            `).join('');
         }
 
-        // ===== МОДАЛЬНОЕ ОКНО =====
         function openEditModal(key) {
             const lesson = allData.lessons.find(l => l.key === key);
             if (!lesson) return;
             editKey = key;
-
             document.getElementById('edit-name').value = lesson.name;
             document.getElementById('edit-topic').value = lesson.topic || '';
             document.getElementById('edit-price').value = lesson.price;
@@ -1030,7 +914,6 @@
             document.getElementById('edit-notes').value = lesson.notes || '';
             document.getElementById('edit-paid').checked = lesson.paid || false;
             document.getElementById('edit-cancelled').checked = lesson.cancelled || false;
-
             document.getElementById('edit-modal').classList.add('active');
         }
 
@@ -1041,7 +924,6 @@
 
         function saveEdit() {
             if (!editKey) return;
-
             const name = document.getElementById('edit-name').value.trim();
             const price = document.getElementById('edit-price').value.trim();
             const topic = document.getElementById('edit-topic').value.trim();
@@ -1050,29 +932,16 @@
             const notes = document.getElementById('edit-notes').value.trim();
             const paid = document.getElementById('edit-paid').checked;
             const cancelled = document.getElementById('edit-cancelled').checked;
-
             if (!name || !price) {
                 tg.showAlert('Заполните имя и стоимость!');
                 return;
             }
-
-            const updated = {
-                name,
-                price: Number(price),
-                topic,
-                duration: Number(duration),
-                date,
-                paid,
-                notes,
-                cancelled
-            };
-
+            const updated = { name, price: Number(price), topic, duration: Number(duration), date, paid, notes, cancelled };
             const old = allData.lessons.find(l => l.key === editKey);
             if (old) {
                 updated.created = old.created;
                 updated.recurring = old.recurring || 'none';
             }
-
             tg.CloudStorage.setItem(editKey, JSON.stringify(updated), () => {
                 closeEditModal();
                 renderAll();
@@ -1091,7 +960,6 @@
             }
         }
 
-        // ===== ОБЩИЙ РЕНДЕР =====
         function renderAll() {
             loadAllData(() => {
                 renderHome();
@@ -1104,14 +972,11 @@
             });
         }
 
-        // ===== ИНИЦИАЛИЗАЦИЯ =====
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('stu-date').value = today;
             selectedDate = today;
-            
             renderAll();
-
             document.getElementById('edit-modal').addEventListener('click', function(e) {
                 if (e.target === this) closeEditModal();
             });
