@@ -3,40 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой Ежедневник</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; background-color: #fff; }
-        input { width: 100%; box-sizing: border-box; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 10px; font-size: 16px; }
-        button { width: 100%; padding: 12px; background: #2481cc; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding-bottom: 70px; background: #f4f4f9; }
+        .page { display: none; padding: 20px; }
+        .active { display: block; }
+        input { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #2481cc; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .nav { position: fixed; bottom: 0; width: 100%; display: flex; background: white; border-top: 1px solid #ddd; }
+        .nav button { border-radius: 0; background: white; color: #555; }
+        .nav button.active-tab { color: #2481cc; font-weight: bold; }
+        .item { background: white; padding: 10px; margin-bottom: 5px; border-radius: 8px; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
-    <h3>Финансы</h3>
-    <input type="text" id="desc" placeholder="Описание">
-    <input type="number" id="sum" placeholder="Сумма">
-    <button onclick="saveData()">Сохранить в Telegram</button>
+
+    <div id="page-home" class="page active">
+        <h3>Траты</h3>
+        <input type="text" id="desc" placeholder="Описание">
+        <input type="number" id="sum" placeholder="Сумма">
+        <button onclick="saveData()">Добавить</button>
+        <div id="list" style="margin-top: 20px;"></div>
+    </div>
+
+    <div id="page-settings" class="page">
+        <h3>Настройки</h3>
+        <button onclick="clearAll()" style="background: #ff3b30;">Очистить все данные</button>
+    </div>
+
+    <div class="nav">
+        <button onclick="showPage('home')" id="btn-home" class="active-tab">Главная</button>
+        <button onclick="showPage('settings')" id="btn-settings">Настройки</button>
+    </div>
 
     <script>
         const tg = window.Telegram.WebApp;
         tg.expand();
 
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active-tab'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.getElementById('btn-' + page).classList.add('active-tab');
+        }
+
+        function loadData() {
+            tg.CloudStorage.getKeys((err, keys) => {
+                keys.filter(k => k.startsWith('item_')).forEach(key => {
+                    tg.CloudStorage.getItem(key, (err, val) => {
+                        const data = JSON.parse(val);
+                        const div = document.createElement('div');
+                        div.className = 'item';
+                        div.innerHTML = Ⓝ<span>${data.desc}</span> <b>${data.sum}₽</b>Ⓝ;
+                        document.getElementById('list').appendChild(div);
+                    });
+                });
+            });
+        }
+
         function saveData() {
             const desc = document.getElementById('desc').value;
             const sum = document.getElementById('sum').value;
-            const key = 'data_' + Date.now();
-            const value = JSON.stringify({ desc, sum, time: new Date().toLocaleString() });
-
-            tg.CloudStorage.setItem(key, value, (err, res) => {
-                if (res) {
-                    alert('Успешно сохранено!');
-                    document.getElementById('desc').value = '';
-                    document.getElementById('sum').value = '';
-                } else {
-                    alert('Ошибка: ' + err);
-                }
+            if(!desc || !sum) return;
+            tg.CloudStorage.setItem('item_' + Date.now(), JSON.stringify({ desc, sum }), () => {
+                location.reload();
             });
         }
+
+        function clearAll() {
+            tg.CloudStorage.getKeys((err, keys) => {
+                keys.forEach(k => tg.CloudStorage.removeItem(k, () => {}));
+                location.reload();
+            });
+        }
+        loadData();
     </script>
 </body>
 </html>
