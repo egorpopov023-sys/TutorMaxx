@@ -7,7 +7,6 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* ===== ОСНОВНЫЕ СТИЛИ (ПАСТЕЛЬНЫЕ ТЁПЛЫЕ ТОНА) ===== */
         body { 
             font-family: -apple-system, sans-serif; 
             background: #fef9f0; 
@@ -161,8 +160,6 @@
         }
         .card:active { transform: scale(0.98); background: #fdf7f0; }
         .card-small { padding: 12px; }
-        .card-no-cursor { cursor: default; }
-        .card-no-cursor:active { transform: none; background: white; }
         
         /* ===== ФОРМЫ ===== */
         input, textarea, select { 
@@ -220,7 +217,7 @@
         .badge-yellow { background: #fcf3d5; color: #b88940; }
         .badge-gray { background: #f0ebe5; color: #b8a090; }
         
-        /* ===== СТАТИСТИКА (ФИНАНСЫ) ===== */
+        /* ===== СТАТИСТИКА ===== */
         .stat-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -299,6 +296,11 @@
             font-weight: bold;
         }
         .calendar-day.weekend { background: #faf3ec; color: #d4a090; }
+        .calendar-day.selected { 
+            background: #e8a87c; 
+            color: white;
+            border-color: #e8a87c;
+        }
         
         /* ===== МОДАЛЬНОЕ ОКНО ===== */
         .modal { 
@@ -448,7 +450,7 @@
     </div>
 
     <!-- ===== ВЕРСИЯ И ОБНОВЛЕНИЕ ===== -->
-    <div class="version-tag" id="version-tag">v1.0.8</div>
+    <div class="version-tag" id="version-tag">v1.0.9</div>
     <button class="update-btn" onclick="forceUpdate()" title="Обновить">🔄</button>
 
     <!-- ===== МОДАЛЬНОЕ ОКНО (РЕДАКТИРОВАНИЕ) ===== -->
@@ -569,13 +571,14 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
         
-        const APP_VERSION = "1.0.8";
+        const APP_VERSION = "1.0.9";
         document.getElementById('version-tag').textContent = 'v' + APP_VERSION;
 
         let allData = { lessons: [], dz: [], students: [] };
         let editKey = null;
         let currentMonth = new Date().getMonth();
         let currentYear = new Date().getFullYear();
+        let selectedDate = new Date().toISOString().split('T')[0];
 
         // ===== МЕНЮ =====
         function toggleMenu() {
@@ -599,14 +602,15 @@
         function navigateTo(page) {
             closeMenu();
             document.querySelectorAll('.side-menu .menu-item').forEach(item => item.classList.remove('active'));
-            document.querySelector(`.side-menu .menu-item[onclick*="${page}"]`)?.classList.add('active');
+            const menuItem = document.querySelector(`.side-menu .menu-item[onclick*="${page}"]`);
+            if (menuItem) menuItem.classList.add('active');
             
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + page).classList.add('active');
+            const pageEl = document.getElementById('page-' + page);
+            if (pageEl) pageEl.classList.add('active');
             
-            if (page === 'home' || page === 'finance' || page === 'lessons' || page === 'students' || page === 'calendar' || page === 'diary') {
-                renderAll();
-            }
+            // ВСЕГДА обновляем данные при переключении
+            renderAll();
         }
 
         // ===== ПРИНУДИТЕЛЬНОЕ ОБНОВЛЕНИЕ =====
@@ -720,7 +724,11 @@
         // ===== ЗАГРУЗКА ВСЕХ ДАННЫХ =====
         function loadAllData(callback) {
             tg.CloudStorage.getKeys((err, keys) => {
-                if (err || !keys) { callback(); return; }
+                if (err || !keys) { 
+                    allData.students = loadStudents();
+                    callback(); 
+                    return; 
+                }
                 let loaded = 0;
                 const total = keys.length;
                 allData.lessons = [];
@@ -889,18 +897,27 @@
                 const dateStr = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
                 const hasLesson = allData.lessons.some(l => l.date === dateStr && !l.cancelled);
                 const isToday = dateStr === today;
+                const isSelected = dateStr === selectedDate;
                 const isWeekend = (new Date(currentYear, currentMonth, day).getDay() === 0 || new Date(currentYear, currentMonth, day).getDay() === 6);
                 
                 let cls = 'calendar-day';
                 if (hasLesson) cls += ' has-lesson';
                 if (isToday) cls += ' today';
-                if (isWeekend && !hasLesson) cls += ' weekend';
+                if (isSelected) cls += ' selected';
+                if (isWeekend && !hasLesson && !isSelected) cls += ' weekend';
                 
-                html += `<div class="${cls}" onclick="showDateLessons('${dateStr}')">${day}</div>`;
+                html += `<div class="${cls}" onclick="selectDate('${dateStr}')">${day}</div>`;
             }
 
             container.innerHTML = html;
-            showDateLessons(today);
+            
+            // Показываем занятия на выбранную дату
+            showDateLessons(selectedDate);
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            renderCalendar(); // Перерисовываем календарь с выделением
         }
 
         function showDateLessons(date) {
@@ -909,7 +926,7 @@
 
             const lessons = allData.lessons.filter(l => l.date === date && !l.cancelled);
             if (lessons.length === 0) {
-                container.innerHTML = '<div class="card" style="text-align:center;color:#b8a090;">На эту дату занятий нет</div>';
+                container.innerHTML = `<div class="card" style="text-align:center;color:#b8a090;">На ${new Date(date).toLocaleDateString('ru')} занятий нет</div>`;
                 return;
             }
 
@@ -1091,6 +1108,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('stu-date').value = today;
+            selectedDate = today;
+            
             renderAll();
 
             document.getElementById('edit-modal').addEventListener('click', function(e) {
